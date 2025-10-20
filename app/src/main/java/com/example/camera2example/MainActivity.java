@@ -10,12 +10,13 @@ import android.os.Bundle;
 import android.view.TextureView;
 import android.view.View;
 import android.widget.Button;
-// ADD THIS IMPORT: This line imports the SeekBar class, which is the UI slider we'll use for zoom.
 import android.widget.SeekBar;
 import android.widget.Toast;
 import androidx.annotation.NonNull; // An annotation that indicates a parameter or return value can't be null.
 import androidx.appcompat.app.AppCompatActivity; // The base class for activities that use the modern app bar.
 import androidx.core.app.ActivityCompat; // Helper for accessing features in 'Activity'.
+import android.widget.TextView;
+import java.util.Locale;
 
 // This declares the main class of our screen (Activity).
 // 'public' means it can be accessed by other classes.
@@ -34,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
 
     // ADD THIS VARIABLE: This variable will hold a reference to the SeekBar UI element from our layout.
     private SeekBar zoomSeekBar;
+
+    // ADD THIS VARIABLE: This will hold a reference to our new TextView.
+    private TextView zoomLevelTextView;
+
 
     // A custom class we've created to handle all the complex camera logic.
     // This helps keep our MainActivity clean and organized.
@@ -66,6 +71,10 @@ public class MainActivity extends AppCompatActivity {
         // ADD THIS LINE: We find the SeekBar from our layout XML file using its ID, 'zoom_seekbar'.
         zoomSeekBar = findViewById(R.id.zoom_seekbar);
 
+        //Find the TextView from the layout by its ID.
+        zoomLevelTextView = findViewById(R.id.zoom_level_text);
+
+
         // We create a new instance of our CameraHelper class.
         // We pass 'this' (which refers to this MainActivity) and the 'textureView'
         // so the helper knows which screen it's on and where to display the camera preview.
@@ -82,17 +91,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Set the initial text for the zoom level.
+        zoomLevelTextView.setText("1.0x");
         // ADD THIS ENTIRE BLOCK: This sets up a listener for the SeekBar to detect when the user moves the slider.
         zoomSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             // This method is called continuously as the user drags the slider's thumb.
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                // 'fromUser' is true if the change was initiated by the user (not programmatically).
                 if (fromUser) {
-                    // We call the 'setZoom' method in our CameraHelper, passing the current progress (0-100).
-                    cameraHelper.setZoom(progress);
+                    // MODIFIED LINE: Call setZoom and get the returned zoom level.
+                    float currentZoom = cameraHelper.setZoom(progress);
+
+                    // ADD THIS LINE: Format the zoom level to one decimal place (e.g., "1.5x") and set it on the TextView.
+                    zoomLevelTextView.setText(String.format(Locale.US, "%.1fx", currentZoom));
                 }
             }
+
 
             // This method is called when the user first touches the slider.
             @Override

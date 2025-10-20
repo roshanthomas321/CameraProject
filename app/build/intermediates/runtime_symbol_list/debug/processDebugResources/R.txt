@@ -3579,6 +3579,8 @@ int id wrap_content 0x7f0801ee
 int id wrap_content_constrained 0x7f0801ef
 int id x_left 0x7f0801f0
 int id x_right 0x7f0801f1
+int id zoom_level_text 0x7f0801f2
+int id zoom_seekbar 0x7f0801f3
 int integer abc_config_activityDefaultDur 0x7f090000
 int integer abc_config_activityShortDur 0x7f090001
 int integer app_bar_elevation_anim_duration 0x7f090002

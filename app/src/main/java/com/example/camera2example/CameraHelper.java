@@ -130,14 +130,14 @@ public class CameraHelper {
     }
 
     // ADD THIS ENTIRE METHOD: This public method will be called from MainActivity whenever the SeekBar's value changes.
-    public void setZoom(int progress) {
+    public float setZoom(int progress) {
         // ADD THIS 'if' BLOCK: A safety check. If zoom isn't supported (maxZoom is 1.0) or we don't know the sensor size yet, do nothing.
         if (sensorRect == null || maxZoom <= 1.0f) {
-            return;
+            return 1.0f;
         }
 
         // ADD THIS LINE: Calculate the desired zoom level. A progress of 0 is 1.0x (no zoom). A progress of 100 is 'maxZoom'.
-        float zoomLevel = 1.0f + (progress / 100.0f) * (maxZoom - 1.0f);
+        float zoomLevel = 1.0f + (progress / 500.0f) * (maxZoom - 1.0f);
 
         // ADD THIS LINE: Calculate the width of the new crop region by dividing the full sensor width by the zoom level.
         int cropWidth = (int) (sensorRect.width() / zoomLevel);
@@ -157,6 +157,8 @@ public class CameraHelper {
 
         // ADD THIS LINE: Call updatePreview() to apply the new zoom setting to the live camera feed.
         updatePreview();
+        return zoomLevel;
+
     }
 
     // ADD THIS ENTIRE METHOD: A new helper method to apply settings and refresh the camera preview.

@@ -4,7 +4,7 @@
             "outputFile": "com.example.camera2example.app-mergeDebugResources-29:/values-w320dp-land-v13/values-w320dp-land-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\roshan_thomas\\.gradle\\caches\\8.13\\transforms\\3e2e0b7a374a5de95de6fde4b84807ab\\transformed\\material-1.11.0\\res\\values-w320dp-land-v13\\values-w320dp-land-v13.xml",
+                    "source": "/Users/roshan.thomas/.gradle/caches/8.13/transforms/3e2e0b7a374a5de95de6fde4b84807ab/transformed/material-1.11.0/res/values-w320dp-land-v13/values-w320dp-land-v13.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
